@@ -93,6 +93,7 @@
     font-family: 'Microsoft Yahei';
     display: inline-block;
     line-height: 3rem;
+
   }
   .rank-banner{
     margin-top: 3rem;

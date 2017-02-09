@@ -40,6 +40,7 @@
     display: inline-block;
     vertical-align: middle;
     margin-left: 1rem;
+    width: 10rem;
   }
   .rank ul li .rank-next{
     position: absolute;

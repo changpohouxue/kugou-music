@@ -33,11 +33,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="plist.vue" pinned="false" current-in-tab="false">
+      <file leaf-file-name="plist.vue" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/components/plist/plist.vue">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="92">
-              <caret line="4" column="36" selection-start-line="4" selection-start-column="36" selection-end-line="4" selection-end-column="36" />
+            <state relative-caret-position="483">
+              <caret line="42" column="17" selection-start-line="42" selection-start-column="17" selection-end-line="42" selection-end-column="17" />
               <folding />
             </state>
           </provider>
@@ -112,11 +112,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="plist_cont.vue" pinned="false" current-in-tab="true">
+      <file leaf-file-name="plist_cont.vue" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/components/plist/plist_cont.vue">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="184">
-              <caret line="35" column="37" selection-start-line="35" selection-start-column="37" selection-end-line="35" selection-end-column="37" />
+            <state relative-caret-position="2346">
+              <caret line="102" column="16" selection-start-line="102" selection-start-column="16" selection-end-line="102" selection-end-column="16" />
               <folding />
             </state>
           </provider>
@@ -155,9 +155,9 @@
         <option value="$PROJECT_DIR$/src/components/rank/rank_list.vue" />
         <option value="$PROJECT_DIR$/src/components/list/list.vue" />
         <option value="$PROJECT_DIR$/src/vuex/state.js" />
-        <option value="$PROJECT_DIR$/src/components/plist/plist.vue" />
         <option value="$PROJECT_DIR$/src/router/index.js" />
         <option value="$PROJECT_DIR$/src/components/plist/plist_cont.vue" />
+        <option value="$PROJECT_DIR$/src/components/plist/plist.vue" />
       </list>
     </option>
   </component>
@@ -542,12 +542,12 @@
       <workItem from="1486452413251" duration="154000" />
       <workItem from="1486452622110" duration="9390000" />
       <workItem from="1486515706121" duration="25857000" />
-      <workItem from="1486601648298" duration="17588000" />
+      <workItem from="1486601648298" duration="17935000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="53158000" />
+    <option name="totallyTimeSpent" value="53505000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="0" />
@@ -943,18 +943,18 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/components/plist/plist.vue">
+    <entry file="file://$PROJECT_DIR$/src/components/plist/plist_cont.vue">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="92">
-          <caret line="4" column="36" selection-start-line="4" selection-start-column="36" selection-end-line="4" selection-end-column="36" />
+        <state relative-caret-position="2346">
+          <caret line="102" column="16" selection-start-line="102" selection-start-column="16" selection-end-line="102" selection-end-column="16" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/components/plist/plist_cont.vue">
+    <entry file="file://$PROJECT_DIR$/src/components/plist/plist.vue">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="184">
-          <caret line="35" column="37" selection-start-line="35" selection-start-column="37" selection-end-line="35" selection-end-column="37" />
+        <state relative-caret-position="483">
+          <caret line="42" column="17" selection-start-line="42" selection-start-column="17" selection-end-line="42" selection-end-column="17" />
           <folding />
         </state>
       </provider>
