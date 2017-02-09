@@ -40,6 +40,7 @@
     top:3.2143rem;
     background: white;
     box-sizing: border-box;
+    z-index: 99;
   }
   .kugou-list>ul li{
     float: left;
@@ -47,6 +48,7 @@
     list-style: none;
     text-align: center;
     font-family: 'Microsoft Yahei';
+    box-shadow: 0 .1785rem .1785rem 0 #f4f4f4;
   }
   a{
     text-decoration: none;

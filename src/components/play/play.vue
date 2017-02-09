@@ -35,7 +35,17 @@
           audio.pause();
       },
       next(){
+        var hash = this.$store.state.next.hash;
+        var name = this.$store.state.next.name;
+        this.$http.get('/api/app/i/getSongInfo.php?cmd=playInfo&hash='+hash+'&from=mkugou',{
 
+        }).then(function(response){
+          var data = response.data;
+          this.$store.state.music.url = data.url;
+          this.$store.state.music.imgUrl = data.imgUrl.replace('{size}','200');
+          this.$store.state.music.name = name;
+
+        })
       }
     }
   }

@@ -19,6 +19,7 @@ const state = {
       name:'歌手'
     }
   ],
+  //新歌默认list
   xgList:[
     {
       name:'赵杰 - 成都(Live)',
@@ -55,12 +56,110 @@ const state = {
       hash:'03685175875DD07363320CB81A6D2C07'
     }
   ],
+  //搜索的音乐结果list
+  searchList:'',
+  //播放的音乐信息
   music:{
     url:'',
     imgUrl:'',
     name:'',
     musicName:''
-  }
+  },
+  //下一首
+  next:{
+     name:'',
+     hash:''
+  },
+  //排行榜list
+  rankList:[
+    {
+      url:'/rank/6666',
+      name:'酷狗飙升榜',
+      img:'http://imge.kugou.com/mcommon/400/20150717/20150717100030907982.png'
+    },{
+      url:'/rank/8888',
+      name:'酷狗TOP500',
+      img:'http://imge.kugou.com/mcommon/400/20150717/20150717100046499341.png'
+    },{
+      url:'/rank/23784',
+      name:'网络红歌榜',
+      img:'http://imge.kugou.com/mcommon/400/20150818/20150818104300762763.png'
+    },{
+      url:'/rank/24971',
+      name:'DJ热歌榜',
+      img:'http://imge.kugou.com/mcommon/400/20160119/20160119114653428408.png'
+    },{
+      url:'/rank/27',
+      name:'华语新歌榜',
+      img:'http://imge.kugou.com/mcommon/400/20150717/20150717100103282211.png'
+    },{
+      url:'/rank/28',
+      name:'欧美新歌榜',
+      img:'http://imge.kugou.com/mcommon/400/20150717/20150717100117648320.png'
+    },{
+      url:'/rank/24045',
+      name:'韩国新歌榜',
+      img:'http://imge.kugou.com/mcommon/400/20170207/20170207104015555457.png'
+    },{
+      url:'/rank/22050',
+      name:'粤语新歌榜',
+      img:'http://imge.kugou.com/mcommon/400/20150717/20150717100200275675.png'
+    },{
+      url:'/rank/28653',
+      name:'原创新歌榜',
+      img:'http://imge.kugou.com/mcommon/400/20161013/20161013110348466009.png'
+    },{
+      url:'/rank/29606',
+      name:'歌手2017榜',
+      img:'http://imge.kugou.com/mcommon/400/20170204/20170204152817352959.png'
+    }
+  ],
+  //排行榜list HASH
+  rankListCont:'',
+  pList:[
+    {
+      url:'/plist/121967',
+      name:'百首华语动听回忆',
+      img:'http://imge.kugou.com/soft/collection/400/20170122/20170122231850395461.jpg'
+    },{
+      url:'/plist/8888',
+      name:'让人无奈的伤感情歌',
+      img:'http://imge.kugou.com/soft/collection/400/20160325/20160325231009182541.jpg'
+    },{
+      url:'/plist/23784',
+      name:'长相思兮长相忆',
+      img:'http://imge.kugou.com/soft/collection/400/20170208/20170208152134159490.jpg'
+    },{
+      url:'/plist/24971',
+      name:'华语乐坛最具辨识度男声',
+      img:'http://imge.kugou.com/soft/collection/400/20170206/20170206175326555213.jpg'
+    },{
+      url:'/plist/27',
+      name:'民谣男嗓，温暖心灵',
+      img:'http://imge.kugou.com/soft/collection/400/20170204/20170204181103731629.jpg'
+    },{
+      url:'/plist/28',
+      name:'专治节后综合症的励志好歌',
+      img:'http://imge.kugou.com/soft/collection/400/20170105/20170105191649262796.jpg'
+    },{
+      url:'/plist/24045',
+      name:'曾经烂大街的外语“神”曲',
+      img:'http://imge.kugou.com/soft/collection/400/20150512/20150512103240551452.jpg'
+    },{
+      url:'/plist/22050',
+      name:'致同桌的你',
+      img:'http://imge.kugou.com/soft/collection/400/20140507/20140507092632667275.jpg'
+    },{
+      url:'/plist/28653',
+      name:'烂大街的网络情歌',
+      img:'http://imge.kugou.com/soft/collection/400/20170201/20170201013152709563.jpg'
+    },{
+      url:'/plist/29606',
+      name:'不得不收藏的网络女声',
+      img:'http://imge.kugou.com/soft/collection/400/20170201/20170201000212919747.jpg'
+    }
+  ],
+  pListCont:''
 
 
 };

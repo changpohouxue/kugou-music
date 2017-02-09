@@ -39,7 +39,7 @@ module.exports = {
         target: 'http://mobilecdn.kugou.com',
         changeOrigin: true,
         pathRewrite: {
-          '^/api': ''
+          '^/search': ''
         }
       },
     },

@@ -6,13 +6,14 @@ import index from 'components/index'
 import list from 'components/list/list.vue'
 import xinge from 'components/list/xg'
 import search from 'components/search/search'
+import rank from 'components/rank/rank'
+import rankList from 'components/rank/rank_list'
+import pList from 'components/plist/plist'
+import pListCont from 'components/plist/plist_cont'
 Vue.use(Router)
 
 const gd = {
   template: '<div><span>歌单</span></div>'
-}
-const phb = {
-  template: '<div><span>排行榜</span></div>'
 }
 const gs = {
   template: '<div><span>歌手</span></div>'
@@ -20,7 +21,7 @@ const gs = {
 const xg = {
   template: '<div><span>新歌</span></div>'
 }
-export default new Router({
+const router =  new Router({
   routes: [
     {
       path: '/',
@@ -37,10 +38,10 @@ export default new Router({
             },
             {
               path:'/gd',
-              component:gd
+              component:pList
             },{
               path:'/phb',
-              component:phb
+              component:rank,
             },{
               path:'/gs',
               component:gs
@@ -54,8 +55,17 @@ export default new Router({
           name:'搜索',
           path:'/search',
           component:search
+        },{
+          name:'排行榜',
+          path:'/rank/:id',
+          component:rankList
+        },{
+          name:'歌单',
+          path:'/plist/:id',
+          component:pListCont
         }
       ]
     }
   ]
-})
+});
+export default router;

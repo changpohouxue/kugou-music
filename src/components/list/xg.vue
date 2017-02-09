@@ -3,8 +3,8 @@
     <img src="./banner.jpg" alt="">
     <div class="kugou-xg-list">
       <ul>
-        <li v-for="item in $store.state.xgList"  >
-            <span :hash = item.hash @click="getUrl">{{item.name}}</span>
+        <li v-for="item in $store.state.xgList"  :hash = item.hash @click="getUrl">
+          {{item.name}}
         </li>
       </ul>
     </div>
@@ -24,6 +24,8 @@
           getUrl(e){
             var hash = e.target.getAttribute('hash');
             var name = e.target.innerHTML;
+            this.$store.state.next.hash = e.target.nextSibling.getAttribute('hash');
+            this.$store.state.next.name = e.target.nextSibling.innerHTML;
             this.$http.get('/api/app/i/getSongInfo.php?cmd=playInfo&hash='+hash+'&from=mkugou',{
 
             }).then(function(response){
@@ -54,11 +56,6 @@
     font-family: 'Microsoft Yahei';
     border-bottom: 1px solid #eee;
     font-size: 1rem;
-  }
-  .kugou-xg ul li span{
-    display: inline-block;
-    width: 100%;
-    height: 100%;
     padding: 20px 0;
   }
 </style>
