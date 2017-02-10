@@ -1,21 +1,13 @@
 # fa
 
-> A Vue.js project
+### VUE 酷狗音乐
 
-## Build Setup
+#### vue+vuex+vue-router 
 
-``` bash
-# install dependencies
-npm install
+#### api 酷狗音乐api
 
-# serve with hot reload at localhost:8080
-npm run dev
+####运行
+  *  npm install
+  *  npm run dev
 
-# build for production with minification
-npm run build
 
-# build for production and view the bundle analyzer report
-npm run build --report
-```
-
-For detailed explanation on how things work, checkout the [guide](http://vuejs-templates.github.io/webpack/) and [docs for vue-loader](http://vuejs.github.io/vue-loader).
