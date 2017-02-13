@@ -1,15 +1,17 @@
 <template>
     <div class="kugou-play">
-      <img :src="$store.state.music.imgUrl" class="gs-img" alt="">
-      <span>{{$store.state.music.name}}</span>
+      <router-link to="/playIndex" class="play-index-router">
+        <img :src="$store.state.music.imgUrl" class="gs-img" alt="">
+        <span>{{$store.state.music.name}}</span>
+      </router-link>
       <div class="kugou-play-img">
-        <!--<img src="./loading.png" alt="" class="pause kugou-loading"  @click="playpause($event)">-->
-        <img src="./pause_icon.png" alt="" class="pause" v-if="seen" @click="pause()">
-        <img src="./play_icon.png" alt="" class="pause"  v-if="seenT" @click="play()">
+        <img src="./loading.png" alt="" class="pause kugou-loading" v-if="$store.state.playStat.load" @click="playpause($event)">
+        <img src="./pause_icon.png" alt="" class="pause" v-if="$store.state.playStat.seen" @click="pause()">
+        <img src="./play_icon.png" alt="" class="pause"  v-if="$store.state.playStat.seenT" @click="play()">
       </div>
 
       <img src="./next_icon.png" alt="" class="next" @click="next">
-      <audio :src="$store.state.music.url" autoplay id="audio"></audio>
+      <audio :src="$store.state.music.url" autoplay @canplaythrough="buffersEnd()" id="audio"></audio>
     </div>
 </template>
 
@@ -17,21 +19,26 @@
   export default{
      data(){
        return{
-          seen:true,
-          seenT:false
+
        }
      },
     methods:{
+      buffersEnd(){
+        this.$store.state.playStat.load = false;
+        this.$store.state.playStat.seen = true;
+        this.$store.state.music.state = true;
+        this.$store.dispatch('buffersEnd'); //通知缓存完毕
+      },
       play(){
           var audio = document.getElementById('audio');
-          this.seen = !this.seen;
-          this.seenT = !this.seenT;
+          this.$store.state.playStat.seen = !this.$store.state.playStat.seen;
+          this.$store.state.playStat.seenT = !this.$store.state.playStat.seenT;
           audio.play();
       },
       pause(){
-          var audio = document.getElementById('audio');
-          this.seen = !this.seen;
-          this.seenT = !this.seenT;
+        var audio = document.getElementById('audio');
+        this.$store.state.playStat.seen = !this.$store.state.playStat.seen;
+        this.$store.state.playStat.seenT = !this.$store.state.playStat.seenT;
           audio.pause();
       },
       next(){
@@ -47,6 +54,9 @@
 
         })
       }
+    },
+    mounted(){
+
     }
   }
 </script>
@@ -68,7 +78,7 @@
   height: 3.75rem;
   border-radius: 4px;
   vertical-align: middle;
-  margin-top: 0.23215rem;
+  margin-top: 0.28rem;
   margin-left: 0.2rem;
 }
 .kugou-play span{
@@ -106,5 +116,9 @@
     transform:rotate(360deg)
   }
 }
-
+.play-index-router{
+  width: auto;
+  height: 100%;
+  padding: 0;
+}
 </style>

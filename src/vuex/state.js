@@ -4,6 +4,12 @@ import Vuex from 'vuex'
 Vue.use(Vuex)
 
 const state = {
+  //音乐是否缓存完毕 load动画
+  playStat:{
+    load:true,
+    seen:false,
+    seenT:false
+  },
   list:[
     {
       url:'xg',
@@ -60,10 +66,17 @@ const state = {
   searchList:'',
   //播放的音乐信息
   music:{
-    url:'',
-    imgUrl:'',
-    name:'',
-    musicName:''
+    url:'',          //歌曲地址
+    imgUrl:'',      //图片
+    name:'',        //歌手名字
+    musicName:'',  //音乐名字
+    lyrics:'',     //歌词
+    state:false,   //是否缓存完毕可以正常播放 判断load
+    timeLength:'', //歌曲总时长
+    timeIndex:{
+      min:'00',
+      sin:'00'
+    }   //当前播放到的时常
   },
   //下一首
   next:{
@@ -159,16 +172,39 @@ const state = {
       img:'http://imge.kugou.com/soft/collection/400/20170201/20170201000212919747.jpg'
     }
   ],
-  pListCont:''
+  pListCont:'',
 
 
 };
 const mutations = {
+  buffersEnd(state){
+    parseInt(state.music.timeIndex.sin++)
+    if(parseInt(state.music.timeIndex.sin) < 10){
+      state.music.timeIndex.sin = '0' + state.music.timeIndex.sin;
+    }
+    if(parseInt(state.music.timeIndex.sin) > 59){
+      state.music.timeIndex.sin = '00';
+      parseInt(state.music.timeIndex.min++);
+      if(parseInt(state.music.timeIndex.min) < 10){
+        state.music.timeIndex.min = '0' + state.music.timeIndex.min;
+      }
+    }
+    console.log(state.music.timeIndex.min + state.music.timeIndex.sin)
+    console.log(state.music.timeLength)
+  }
 
 
 };
+const actions = {
+  buffersEnd (context) {
+    setInterval(function(){
+      context.commit('buffersEnd')
+    },1000)
 
+  }
+};
 export default new Vuex.Store({
     state,
-    mutations
+    mutations,
+    actions
 });

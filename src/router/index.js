@@ -10,6 +10,7 @@ import rank from 'components/rank/rank'
 import rankList from 'components/rank/rank_list'
 import pList from 'components/plist/plist'
 import pListCont from 'components/plist/plist_cont'
+import playIndex from 'components/play_index/play_index'
 Vue.use(Router)
 
 const gd = {
@@ -63,6 +64,10 @@ const router =  new Router({
           name:'歌单',
           path:'/plist/:id',
           component:pListCont
+        },{
+          name:'歌词',
+          path:'/playIndex',
+          component:playIndex
         }
       ]
     }

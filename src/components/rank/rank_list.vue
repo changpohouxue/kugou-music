@@ -33,8 +33,11 @@
         window.history.go(-1)
       },
       getUrl(e){
+        this.$store.state.playStat.load = true;
+        this.$store.state.playStat.seen = false;
+        this.$store.state.playStat.seenT = false;
         var hash = e.target.getAttribute('hash');
-        var name = e.target.innerText.slice(2,e.target.innerText.length);
+        var name = e.target.innerText.slice(2,e.target.innerText.length).replace(/(^\s*)|(\s*$)/g, "");
         this.$store.state.next.hash = e.target.nextSibling.getAttribute('hash');
         this.$store.state.next.name = e.target.nextSibling.innerHTML;
         this.$http.get('/api/app/i/getSongInfo.php?cmd=playInfo&hash='+hash+'&from=mkugou',{
@@ -44,7 +47,21 @@
           this.$store.state.music.url = data.url;
           this.$store.state.music.imgUrl = data.imgUrl.replace('{size}','200');
           this.$store.state.music.name = name;
+          //fen
+          var min = parseInt(parseInt(data.timeLength) / 60);
+          //s秒
+          var s = ((parseInt(data.timeLength) / 60 - min) * 60).toFixed(0);
+          if(s.length < 2){
+            s = '0' + s;
+          }
+          this.$store.state.music.timeLength = min +':' + s;
 
+        });
+        this.$http.get('/api/app/i/krc.php?cmd=100&keyword='+name+'&hash='+hash+'&timelength=329000&d=0.4067039370406582',{
+
+        }).then(function(response){
+          var data = response.data;
+          this.$store.state.music.lyrics = data;
         })
       }
     },
