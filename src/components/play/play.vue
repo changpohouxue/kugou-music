@@ -42,6 +42,7 @@
           audio.pause();
       },
       next(){
+        console.log(this)
         var hash = this.$store.state.next.hash;
         var name = this.$store.state.next.name;
         this.$http.get('/api/app/i/getSongInfo.php?cmd=playInfo&hash='+hash+'&from=mkugou',{
@@ -52,6 +53,12 @@
           this.$store.state.music.imgUrl = data.imgUrl.replace('{size}','200');
           this.$store.state.music.name = name;
 
+        })
+        this.$http.get('/api/app/i/krc.php?cmd=100&keyword='+name+'&hash='+hash+'&timelength=329000&d=0.4067039370406582',{
+
+        }).then(function(response){
+          var data = response.data;
+          this.$store.state.music.lyrics = data;
         })
       }
     },

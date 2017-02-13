@@ -66,7 +66,7 @@ const state = {
   searchList:'',
   //播放的音乐信息
   music:{
-    url:'',          //歌曲地址
+    url:'',         //歌曲地址
     imgUrl:'',      //图片
     name:'',        //歌手名字
     musicName:'',  //音乐名字
@@ -177,8 +177,10 @@ const state = {
 
 };
 const mutations = {
-  buffersEnd(state){
-    parseInt(state.music.timeIndex.sin++)
+  buffersEnd(state,call){
+    var dom = document.getElementsByClassName('kugou-player-strip-index')[0];
+    parseInt(state.music.timeIndex.sin++);
+    //分秒
     if(parseInt(state.music.timeIndex.sin) < 10){
       state.music.timeIndex.sin = '0' + state.music.timeIndex.sin;
     }
@@ -189,18 +191,23 @@ const mutations = {
         state.music.timeIndex.min = '0' + state.music.timeIndex.min;
       }
     }
-    console.log(state.music.timeIndex.min + state.music.timeIndex.sin)
-    console.log(state.music.timeLength)
+    if(parseInt(state.music.timeIndex.min + state.music.timeIndex.sin)==parseInt(state.music.timeLength.replace(':',''))){ //播放结束
+      call();
+      state.music.timeIndex.min = '00';
+      state.music.timeIndex.sin = '00';
+    }
+    dom.style.left = (parseInt(state.music.timeIndex.min + state.music.timeIndex.sin)) / parseInt(state.music.timeLength.replace(':','')) * 100+'%'; //滚动
   }
 
 
 };
 const actions = {
   buffersEnd (context) {
-    setInterval(function(){
-      context.commit('buffersEnd')
+   var t = setInterval(function(){
+      context.commit('buffersEnd',function(){
+        clearInterval(t);
+      })
     },1000)
-
   }
 };
 export default new Vuex.Store({

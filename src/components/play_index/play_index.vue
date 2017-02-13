@@ -39,9 +39,6 @@
     mounted(){
        var dom = document.getElementsByClassName('play-index-bg')[0];
        dom.style.backgroundImage= 'url('+this.$store.state.music.imgUrl+')';
-       if(this.$store.state.music.state){
-
-       }
     }
   }
 </script>
