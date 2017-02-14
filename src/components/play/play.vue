@@ -19,7 +19,9 @@
   export default{
      data(){
        return{
-
+            setInt:'',
+            height:0,
+            top:0
        }
      },
     methods:{
@@ -27,24 +29,75 @@
         this.$store.state.playStat.load = false;
         this.$store.state.playStat.seen = true;
         this.$store.state.music.state = true;
-        this.$store.dispatch('buffersEnd'); //通知缓存完毕
+        this.timeIndex();
+      },
+      timeIndex(){
+        var that = this;
+
+        that.setInt = setInterval(function(){
+           that.timeRight(function(){
+             clearInterval(that.setInt);
+             that.next();
+           })
+        },1000);
+
+      },
+      timeRight(call){
+        var dom = document.getElementsByClassName('kugou-player-strip-index')[0];
+        var lyrics = document.getElementsByClassName('kugou-play-lyrics-context-index')[0];
+        var lyricsPar = document.getElementsByClassName('kugou-play-lyrics-context')[0];
+        var span = document.getElementsByClassName('kugou-lyrics');
+        this.height = lyrics.offsetHeight;
+        var lyricsParHeight = lyricsPar.offsetHeight;
+        parseInt(this.$store.state.music.timeIndex.sin++);
+        //分秒
+        if(parseInt(this.$store.state.music.timeIndex.sin) < 10){
+          this.$store.state.music.timeIndex.sin = '0' + this.$store.state.music.timeIndex.sin;
+        }
+        if(parseInt(this.$store.state.music.timeIndex.sin) > 59){
+          this.$store.state.music.timeIndex.sin = '00';
+          parseInt(this.$store.state.music.timeIndex.min++);
+          if(parseInt(this.$store.state.music.timeIndex.min) < 10){
+            this.$store.state.music.timeIndex.min = '0' + this.$store.state.music.timeIndex.min;
+          }
+        }
+
+        for(var i = 0;i<span.length;i++){
+
+          if((this.$store.state.music.timeIndex.min +':'+ this.$store.state.music.timeIndex.sin) == span[i].getAttribute('time')){
+            span[i].setAttribute('class','kugou-lyrics');
+            span[i].setAttribute('class','kugou-lyrics lyrics-active');
+              var scroTop = span[i].offsetTop;
+              lyrics.style.top = -(scroTop / lyricsParHeight * 100)+'%';
+          }
+        }
+        if(parseInt(this.$store.state.music.timeIndex.min + this.$store.state.music.timeIndex.sin)==parseInt(this.$store.state.music.timeLength.replace(':',''))){ //播放结束
+          call();
+          this.$store.state.music.timeIndex.min = '00';
+          this.$store.state.music.timeIndex.sin = '00';
+        }
+        dom.style.left = (parseInt(this.$store.state.music.timeIndex.min + this.$store.state.music.timeIndex.sin)) / parseInt(this.$store.state.music.timeLength.replace(':','')) * 100+'%'; //滚动
       },
       play(){
           var audio = document.getElementById('audio');
           this.$store.state.playStat.seen = !this.$store.state.playStat.seen;
           this.$store.state.playStat.seenT = !this.$store.state.playStat.seenT;
           audio.play();
+          this.timeIndex();
       },
       pause(){
+        clearInterval(this.setInt);
         var audio = document.getElementById('audio');
         this.$store.state.playStat.seen = !this.$store.state.playStat.seen;
         this.$store.state.playStat.seenT = !this.$store.state.playStat.seenT;
-          audio.pause();
+        audio.pause();
       },
       next(){
-        console.log(this)
         var hash = this.$store.state.next.hash;
         var name = this.$store.state.next.name;
+        this.$store.state.music.timeIndex.min = '00';
+        this.$store.state.music.timeIndex.sin = '00';
+        clearInterval(this.setInt);
         this.$http.get('/api/app/i/getSongInfo.php?cmd=playInfo&hash='+hash+'&from=mkugou',{
 
         }).then(function(response){
@@ -52,7 +105,13 @@
           this.$store.state.music.url = data.url;
           this.$store.state.music.imgUrl = data.imgUrl.replace('{size}','200');
           this.$store.state.music.name = name;
-
+          var min = parseInt(parseInt(data.timeLength) / 60);
+          //s秒
+          var s = ((parseInt(data.timeLength) / 60 - min) * 60).toFixed(0);
+          if(s.length < 2){
+            s = '0' + s;
+          }
+          this.$store.state.music.timeLength =min +':' + s;
         })
         this.$http.get('/api/app/i/krc.php?cmd=100&keyword='+name+'&hash='+hash+'&timelength=329000&d=0.4067039370406582',{
 

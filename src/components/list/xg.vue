@@ -14,7 +14,7 @@
 <script>
 
     export default {
-        name:'新歌list',
+        name:'list',
         data(){
           return {
 
@@ -26,6 +26,8 @@
             this.$store.state.playStat.load = true;
             this.$store.state.playStat.seen = false;
             this.$store.state.playStat.seenT = false;
+            this.$store.state.music.timeIndex.min = '00';
+            this.$store.state.music.timeIndex.sin = '00';
             var hash = e.target.getAttribute('hash');
             var name = e.target.innerHTML.replace(/(^\s*)|(\s*$)/g, "");
             this.$store.state.next.hash = e.target.nextSibling.getAttribute('hash');

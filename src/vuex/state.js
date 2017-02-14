@@ -177,38 +177,13 @@ const state = {
 
 };
 const mutations = {
-  buffersEnd(state,call){
-    var dom = document.getElementsByClassName('kugou-player-strip-index')[0];
-    parseInt(state.music.timeIndex.sin++);
-    //分秒
-    if(parseInt(state.music.timeIndex.sin) < 10){
-      state.music.timeIndex.sin = '0' + state.music.timeIndex.sin;
-    }
-    if(parseInt(state.music.timeIndex.sin) > 59){
-      state.music.timeIndex.sin = '00';
-      parseInt(state.music.timeIndex.min++);
-      if(parseInt(state.music.timeIndex.min) < 10){
-        state.music.timeIndex.min = '0' + state.music.timeIndex.min;
-      }
-    }
-    if(parseInt(state.music.timeIndex.min + state.music.timeIndex.sin)==parseInt(state.music.timeLength.replace(':',''))){ //播放结束
-      call();
-      state.music.timeIndex.min = '00';
-      state.music.timeIndex.sin = '00';
-    }
-    dom.style.left = (parseInt(state.music.timeIndex.min + state.music.timeIndex.sin)) / parseInt(state.music.timeLength.replace(':','')) * 100+'%'; //滚动
-  }
+
+
 
 
 };
 const actions = {
-  buffersEnd (context) {
-   var t = setInterval(function(){
-      context.commit('buffersEnd',function(){
-        clearInterval(t);
-      })
-    },1000)
-  }
+
 };
 export default new Vuex.Store({
     state,

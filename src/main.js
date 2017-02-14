@@ -2,7 +2,9 @@ import Vue from 'vue'
 import App from './App'
 import router from './router'
 import VueResource from 'vue-resource'
+import axios from 'axios'
 Vue.use(VueResource)
+Vue.use(axios)
 import store from './vuex/state'
 /* eslint-disable no-new */
 var vm = new Vue({

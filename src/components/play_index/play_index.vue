@@ -9,7 +9,9 @@
       <div class="kugou-play-lyrics">
         <img :src="$store.state.music.imgUrl" alt="">
         <div class="kugou-play-lyrics-context">
-          <span v-for="item in $store.state.music.lyrics.split('[')">{{item.slice('9',item.length)}}</span>
+           <div class="kugou-play-lyrics-context-index">
+             <span v-for="item in $store.state.music.lyrics.split('[')" :time="item.slice('0','5')" class="kugou-lyrics">{{item.slice('9',item.length)}}</span>
+           </div>
         </div>
         <div class="kugou-player">
             <!--<span class="time-start">0{{String($store.state.music.timeIndex).replace('.',':')}}</span>-->
@@ -116,11 +118,13 @@
     width: 100%;
     position: absolute;
     top:11rem;
-    padding: 0 10px;
-    left: 50%;
-    transform: translateX(-50%);
     height: 50%;
     overflow: hidden;
+  }
+  .kugou-play-lyrics .kugou-play-lyrics-context .kugou-play-lyrics-context-index{
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
   }
   .kugou-play-lyrics .kugou-play-lyrics-context span{
     display: block;
@@ -162,5 +166,9 @@
     right:10px;
     top:50%;
     transform: translateY(-50%);
+  }
+  .lyrics-active{
+    color: red;
+
   }
 </style>

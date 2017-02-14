@@ -11,7 +11,7 @@
 
 <script>
     export default {
-       name:"导航",
+       name:"home",
        data (){
           return {
 
