@@ -20,8 +20,7 @@
      data(){
        return{
             setInt:'',
-            height:0,
-            top:0
+
        }
      },
     methods:{
@@ -29,7 +28,9 @@
         this.$store.state.playStat.load = false;
         this.$store.state.playStat.seen = true;
         this.$store.state.music.state = true;
+        clearInterval(this.setInt);
         this.timeIndex();
+
       },
       timeIndex(){
         var that = this;
@@ -47,7 +48,6 @@
         var lyrics = document.getElementsByClassName('kugou-play-lyrics-context-index')[0];
         var lyricsPar = document.getElementsByClassName('kugou-play-lyrics-context')[0];
         var span = document.getElementsByClassName('kugou-lyrics');
-        this.height = lyrics.offsetHeight;
         var lyricsParHeight = lyricsPar.offsetHeight;
         parseInt(this.$store.state.music.timeIndex.sin++);
         //分秒
@@ -65,10 +65,7 @@
         for(var i = 0;i<span.length;i++){
 
           if((this.$store.state.music.timeIndex.min +':'+ this.$store.state.music.timeIndex.sin) == span[i].getAttribute('time')){
-            console.log(span[i].previousSibling);
             span[i].previousSibling.setAttribute('class','kugou-lyrics');
-
-
             span[i].setAttribute('class','kugou-lyrics lyrics-active');
               var scroTop = span[i].offsetTop;
               lyrics.style.top = -(scroTop / lyricsParHeight * 100)+20+'%';
@@ -100,6 +97,8 @@
         var name = this.$store.state.next.name;
         this.$store.state.music.timeIndex.min = '00';
         this.$store.state.music.timeIndex.sin = '00';
+        var lyrics = document.getElementsByClassName('kugou-play-lyrics-context-index')[0];
+        lyrics.style.top = 0;
         clearInterval(this.setInt);
         this.$http.get('/api/app/i/getSongInfo.php?cmd=playInfo&hash='+hash+'&from=mkugou',{
 
