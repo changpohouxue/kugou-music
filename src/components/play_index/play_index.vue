@@ -99,11 +99,11 @@
   .kugou-play-lyrics{
     min-width: 100%;
     position: absolute;
-    top:6.412rem;
+    top:50%;
     left: 50%;
-    transform: translateX(-50%);
+    transform: translate(-50%,-50%);
     z-index: 999;
-    height:60%;
+    height:69%;
     max-width: 650px;
     color: #AFABAC;
   }
@@ -117,8 +117,10 @@
   .kugou-play-lyrics .kugou-play-lyrics-context{
     width: 100%;
     position: absolute;
-    top:11rem;
-    height: 50%;
+    top:11.7143rem;
+    left: 50%;
+    transform: translateX(-50%);
+    height: 55%;
     overflow: hidden;
   }
   .kugou-play-lyrics .kugou-play-lyrics-context .kugou-play-lyrics-context-index{

@@ -65,10 +65,13 @@
         for(var i = 0;i<span.length;i++){
 
           if((this.$store.state.music.timeIndex.min +':'+ this.$store.state.music.timeIndex.sin) == span[i].getAttribute('time')){
-            span[i].setAttribute('class','kugou-lyrics');
+            console.log(span[i].previousSibling);
+            span[i].previousSibling.setAttribute('class','kugou-lyrics');
+
+
             span[i].setAttribute('class','kugou-lyrics lyrics-active');
               var scroTop = span[i].offsetTop;
-              lyrics.style.top = -(scroTop / lyricsParHeight * 100)+'%';
+              lyrics.style.top = -(scroTop / lyricsParHeight * 100)+20+'%';
           }
         }
         if(parseInt(this.$store.state.music.timeIndex.min + this.$store.state.music.timeIndex.sin)==parseInt(this.$store.state.music.timeLength.replace(':',''))){ //播放结束
