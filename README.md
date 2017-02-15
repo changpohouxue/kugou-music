@@ -11,6 +11,6 @@
   *  npm run dev
   
 #### 截图
-  ![](file:///C:/vue/kugou-music/img/QQ%E6%88%AA%E5%9B%BE20170215101902.jpg) 
+  ![avatar](https://github.com/MaybeLin/kugou-music/blob/master/img/QQ%E6%88%AA%E5%9B%BE20170215101902.jpg) 
 
 
