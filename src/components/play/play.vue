@@ -34,7 +34,6 @@
       },
       timeIndex(){
         var that = this;
-
         that.setInt = setInterval(function(){
            that.timeRight(function(){
              clearInterval(that.setInt);
@@ -48,35 +47,39 @@
         var lyrics = document.getElementsByClassName('kugou-play-lyrics-context-index')[0];
         var lyricsPar = document.getElementsByClassName('kugou-play-lyrics-context')[0];
         var span = document.getElementsByClassName('kugou-lyrics');
-        var lyricsParHeight = lyricsPar.offsetHeight;
-        parseInt(this.$store.state.music.timeIndex.sin++);
-        //分秒
-        if(parseInt(this.$store.state.music.timeIndex.sin) < 10){
-          this.$store.state.music.timeIndex.sin = '0' + this.$store.state.music.timeIndex.sin;
-        }
-        if(parseInt(this.$store.state.music.timeIndex.sin) > 59){
-          this.$store.state.music.timeIndex.sin = '00';
-          parseInt(this.$store.state.music.timeIndex.min++);
-          if(parseInt(this.$store.state.music.timeIndex.min) < 10){
-            this.$store.state.music.timeIndex.min = '0' + this.$store.state.music.timeIndex.min;
+        if(span.length > 0){
+          var lyricsParHeight = lyricsPar.offsetHeight;
+          parseInt(this.$store.state.music.timeIndex.sin++);
+          //分秒
+          if(parseInt(this.$store.state.music.timeIndex.sin) < 10){
+            this.$store.state.music.timeIndex.sin = '0' + this.$store.state.music.timeIndex.sin;
           }
-        }
+          if(parseInt(this.$store.state.music.timeIndex.sin) > 59){
+            this.$store.state.music.timeIndex.sin = '00';
+            parseInt(this.$store.state.music.timeIndex.min++);
+            if(parseInt(this.$store.state.music.timeIndex.min) < 10){
+              this.$store.state.music.timeIndex.min = '0' + this.$store.state.music.timeIndex.min;
+            }
+          }
 
-        for(var i = 0;i<span.length;i++){
+          for(var i = 0;i<span.length;i++){
 
-          if((this.$store.state.music.timeIndex.min +':'+ this.$store.state.music.timeIndex.sin) == span[i].getAttribute('time')){
-            span[i].previousSibling.setAttribute('class','kugou-lyrics');
-            span[i].setAttribute('class','kugou-lyrics lyrics-active');
+            if((this.$store.state.music.timeIndex.min +':'+ this.$store.state.music.timeIndex.sin) == span[i].getAttribute('time')){
+              span[i].previousSibling.setAttribute('class','kugou-lyrics');
+              span[i].setAttribute('class','kugou-lyrics lyrics-active');
               var scroTop = span[i].offsetTop;
               lyrics.style.top = -(scroTop / lyricsParHeight * 100)+20+'%';
+            }
           }
+          if(parseInt(this.$store.state.music.timeIndex.min + this.$store.state.music.timeIndex.sin)==parseInt(this.$store.state.music.timeLength.replace(':',''))){ //播放结束
+            call();
+            this.$store.state.music.timeIndex.min = '00';
+            this.$store.state.music.timeIndex.sin = '00';
+          }
+          dom.style.left = (parseInt(this.$store.state.music.timeIndex.min + this.$store.state.music.timeIndex.sin)) / parseInt(this.$store.state.music.timeLength.replace(':','')) * 100+'%'; //滚动
         }
-        if(parseInt(this.$store.state.music.timeIndex.min + this.$store.state.music.timeIndex.sin)==parseInt(this.$store.state.music.timeLength.replace(':',''))){ //播放结束
-          call();
-          this.$store.state.music.timeIndex.min = '00';
-          this.$store.state.music.timeIndex.sin = '00';
-        }
-        dom.style.left = (parseInt(this.$store.state.music.timeIndex.min + this.$store.state.music.timeIndex.sin)) / parseInt(this.$store.state.music.timeLength.replace(':','')) * 100+'%'; //滚动
+
+
       },
       play(){
           var audio = document.getElementById('audio');
@@ -114,7 +117,7 @@
             s = '0' + s;
           }
           this.$store.state.music.timeLength =min +':' + s;
-        })
+        });
         this.$http.get('/api/app/i/krc.php?cmd=100&keyword='+name+'&hash='+hash+'&timelength=329000&d=0.4067039370406582',{
 
         }).then(function(response){

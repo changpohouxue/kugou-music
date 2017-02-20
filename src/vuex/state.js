@@ -1,5 +1,6 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
+import Axios from 'axios'
 
 Vue.use(Vuex)
 
@@ -82,6 +83,11 @@ const state = {
   next:{
      name:'',
      hash:''
+  },
+  //要搜索的hash和name
+  getMusic:{
+    name:'',
+    hash:''
   },
   //排行榜list
   rankList:[
@@ -177,7 +183,36 @@ const state = {
 
 };
 const mutations = {
+  getApi(state){
+    state.playStat.load = true;
+    state.playStat.seen = false;
+    state.playStat.seenT = false;
+    state.music.timeIndex.min = '00';
+    state.music.timeIndex.sin = '00';
+    Axios.get('/api/app/i/getSongInfo.php?cmd=playInfo&hash='+state.getMusic.hash+'&from=mkugou',{
 
+      }).then(function(response){
+        var data = response.data;
+        console.log(data);
+        state.music.url = data.url;
+        state.music.imgUrl = data.imgUrl.replace('{size}','200');
+        //fen
+        var min = parseInt(parseInt(data.timeLength) / 60);
+        //s秒
+        var s = ((parseInt(data.timeLength) / 60 - min) * 60).toFixed(0);
+        if(s.length < 2){
+          s = '0' + s;
+        }
+        state.music.timeLength =min +':' + s;
+        state.music.name = state.getMusic.name;
+      });
+    Axios.get('/api/app/i/krc.php?cmd=100&keyword='+state.getMusic.name+'&hash='+state.getMusic.hash+'&timelength=329000&d=0.4067039370406582',{
+
+    }).then(function(response){
+      var data = response.data;
+      state.music.lyrics = data;
+    })
+  }
 
 
 
