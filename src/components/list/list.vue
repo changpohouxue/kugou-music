@@ -27,12 +27,6 @@
       mounted(){
           var list = document.getElementsByClassName('kugou-list-li')[0];
           list.setAttribute('class','kugou-list-li kugou-active');
-          var li0 = document.getElementsByClassName('kugou-xg-list-li')[0];
-          if(li0){
-          	 this.$store.state.getMusic.hash = li0.getAttribute('hash');
-             this.$store.state.getMusic.name = li0.innerHTML.replace(/(^\s*)|(\s*$)/g, "");
-             this.$store.commit('getApi')
-          }
             
       }
     }

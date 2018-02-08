@@ -92,7 +92,6 @@
 
       },
       play(){
-      console.log(11111111111)
           var audio = document.getElementById('audio');
           this.$store.state.playStat.seen = !this.$store.state.playStat.seen;
           this.$store.state.playStat.seenT = !this.$store.state.playStat.seenT;
