@@ -26,6 +26,8 @@ const state = {
       name:'歌手'
     }
   ],
+  
+  currentList:[],
   //新歌默认list
   xgList:[
     {

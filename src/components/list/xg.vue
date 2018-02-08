@@ -3,7 +3,7 @@
     <img src="./banner.jpg" alt="">
     <div class="kugou-xg-list">
       <ul>
-        <li v-for="item in $store.state.xgList"  :hash = item.hash @click="getUrl">
+        <li class="kugou-xg-list-li" v-for="item in $store.state.xgList"  :hash = item.hash @click="getUrl">
           {{item.name}}
         </li>
       </ul>

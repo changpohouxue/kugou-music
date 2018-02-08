@@ -24,7 +24,17 @@
        }
      },
     methods:{
+ 
       buffersEnd(){
+        if( document.getElementsByClassName('kugou-xg-list').length>0){
+        	this.$store.state.currentList = this.$store.state.xgList;
+        }else if(document.getElementsByClassName('rank-list').length>0){
+        	this.$store.state.currentList = this.$store.state.rankListCont;
+        }else if(document.getElementsByClassName('p-list').length>0){
+        	this.$store.state.currentList = this.$store.state.pListCont;
+        }else{
+        }
+
         this.$store.state.playStat.load = false;
         this.$store.state.playStat.seen = true;
         this.$store.state.music.state = true;
@@ -82,6 +92,7 @@
 
       },
       play(){
+      console.log(11111111111)
           var audio = document.getElementById('audio');
           this.$store.state.playStat.seen = !this.$store.state.playStat.seen;
           this.$store.state.playStat.seenT = !this.$store.state.playStat.seenT;
@@ -96,16 +107,36 @@
         audio.pause();
       },
       next(){
-        var hash = this.$store.state.next.hash;
-        var name = this.$store.state.next.name;
+        var index;
+        for (index in this.$store.state.currentList){
+        	if (this.$store.state.currentList[index].hash == this.$store.state.getMusic.hash){
+          		break;
+       		}
+        }
+        
+        var currentIndex;
+        if(index==(this.$store.state.currentList.length-1)){
+        	currentIndex = 0;
+        }else{
+            currentIndex = parseInt(index)+1;
+        }
+        
+        
+        
+        var hash = this.$store.state.currentList[currentIndex].hash;
+        var name = this.$store.state.currentList[currentIndex].name;
         this.$store.state.music.timeIndex.min = '00';
         this.$store.state.music.timeIndex.sin = '00';
         var lyrics = document.getElementsByClassName('kugou-play-lyrics-context-index')[0];
-        lyrics.style.top = 0;
+        if(lyrics){
+         lyrics.style.top = 0;
+        }
+       
         clearInterval(this.setInt);
         this.$http.get('/api/app/i/getSongInfo.php?cmd=playInfo&hash='+hash+'&from=mkugou',{
 
         }).then(function(response){
+ 
           var data = response.data;
           this.$store.state.music.url = data.url;
           this.$store.state.music.imgUrl = data.imgUrl.replace('{size}','200');
@@ -117,6 +148,8 @@
             s = '0' + s;
           }
           this.$store.state.music.timeLength =min +':' + s;
+          
+          this.$store.state.getMusic.hash = hash;
         });
         this.$http.get('/api/app/i/krc.php?cmd=100&keyword='+name+'&hash='+hash+'&timelength=329000&d=0.4067039370406582',{
 

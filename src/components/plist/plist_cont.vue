@@ -1,5 +1,5 @@
 <template>
-  <div class="rank-list">
+  <div class="rank-list p-list">
     <div class="rank-list-title">
       <img src="./goback.png" alt="" @click="historyGo">
       <span>{{rankTitle}}</span>
