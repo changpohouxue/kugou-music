@@ -110,7 +110,6 @@
       },
       next(){
         var index;
-        console.log(this.$store.state.currentList)
         for (index in this.$store.state.currentList){
         	if (this.$store.state.currentList[index].hash == this.$store.state.getMusic.hash){
           		break;

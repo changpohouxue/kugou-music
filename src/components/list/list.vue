@@ -27,7 +27,6 @@
       mounted(){
           var list = document.getElementsByClassName('kugou-list-li')[0];
           list.setAttribute('class','kugou-list-li kugou-active');
-            
       }
     }
 </script>
