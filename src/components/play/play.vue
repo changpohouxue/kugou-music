@@ -32,6 +32,9 @@
         	this.$store.state.currentList = this.$store.state.rankListCont;
         }else if(document.getElementsByClassName('p-list').length>0){
         	this.$store.state.currentList = this.$store.state.pListCont;
+        }else if(document.getElementsByClassName('kugou-child-search').length>0){
+        	this.$store.state.searchFlag = true;
+        	this.$store.state.currentList = this.$store.state.searchList.info;	
         }else{
         }
 
@@ -107,6 +110,7 @@
       },
       next(){
         var index;
+        console.log(this.$store.state.currentList)
         for (index in this.$store.state.currentList){
         	if (this.$store.state.currentList[index].hash == this.$store.state.getMusic.hash){
           		break;
@@ -123,7 +127,12 @@
         
         
         var hash = this.$store.state.currentList[currentIndex].hash;
-        var name = this.$store.state.currentList[currentIndex].name;
+        var name;
+        if(this.$store.state.searchFlag){
+            name = this.$store.state.currentList[currentIndex].filename;
+        }else{
+        	name = this.$store.state.currentList[currentIndex].name;
+        }
         this.$store.state.music.timeIndex.min = '00';
         this.$store.state.music.timeIndex.sin = '00';
         var lyrics = document.getElementsByClassName('kugou-play-lyrics-context-index')[0];

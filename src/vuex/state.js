@@ -67,6 +67,7 @@ const state = {
   ],
   //搜索的音乐结果list
   searchList:'',
+  searchFlag:false,
   //播放的音乐信息
   music:{
     url:'',         //歌曲地址
