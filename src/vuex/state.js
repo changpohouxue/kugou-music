@@ -65,6 +65,9 @@ const state = {
       hash:'03685175875DD07363320CB81A6D2C07'
     }
   ],
+  
+  
+  
   //搜索的音乐结果list
   searchList:'',
   searchFlag:false,
@@ -136,6 +139,43 @@ const state = {
       img:'http://imge.kugou.com/mcommon/400/20170204/20170204152817352959.png'
     }
   ],
+  
+  singerList:[
+    {
+      url:'/singerlist/88',
+      name:'热门歌手',
+    },{
+      url:'/singerlist/1',
+	  name:'华语男歌手'
+    },{
+      url:'/singerlist/2',
+	  name:'华语女歌手'
+    },{
+      url:'/singerlist/3',
+	  name:'华语组合'
+    },{
+      url:'/singerlist/4',
+	  name:'日韩男歌手'
+    },{
+      url:'/singerlist/5',
+	  name:'日韩女歌手'
+    },{
+      url:'/singerlist/6',
+	  name:'日韩组合'
+    },{
+      url:'/singerlist/7',
+	  name:'欧美男歌手'
+    },{
+      url:'/singerlist/8',
+	  name:'欧美女歌手'
+    },{
+	  url:'/singerlist/9',
+	  name:'欧美组合'
+    }
+  ],
+  
+  singerListCont:'',
+  singerListDetailCont:'',
   //排行榜list HASH
   rankListCont:'',
   pList:[
