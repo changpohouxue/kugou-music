@@ -45,10 +45,10 @@
     mounted(){
       this.rankIdi = this.$route.params.id;
 
-      this.$http.get('/api/plist/list/?specialid='+this.rankIdi+'&page=2&json=true',{
+      this.$http.get('/api/plist/list/'+this.rankIdi+'?page=1&json=true',{
 
       }).then(function(response){
-        var data = response.data;
+        var data = response.body;
         this.data = data;
         this.rankTitle = data.info.list.specialname;
         this.rankBanner = data.info.list.imgurl.replace('{size}',400);
