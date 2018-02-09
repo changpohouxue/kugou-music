@@ -1,5 +1,5 @@
 <template>
-  <div class="rank-list p-list">
+  <div class="rank-list">
     <div class="rank-list-title">
       <img src="./goback.png" alt="" @click="historyGo">
       <span>{{rankTitle}}</span>
@@ -32,6 +32,8 @@
         window.history.go(-1)
       },
       getUrl(e){
+        this.$store.state.searchFlag = true;
+        this.$store.state.currentList = this.$store.state.pListCont;
         //歌曲信息
         this.$store.state.getMusic.hash = e.target.getAttribute('hash');
         this.$store.state.getMusic.name = e.target.innerHTML.replace(/(^\s*)|(\s*$)/g, "");

@@ -34,6 +34,8 @@
       },
       getUrl(e){
         //歌曲信息
+        this.$store.state.searchFlag = true;
+        this.$store.state.currentList = this.$store.state.rankListCont;
         this.$store.state.getMusic.hash = e.target.getAttribute('hash');
         this.$store.state.getMusic.name = e.target.innerHTML.replace(/(^\s*)|(\s*$)/g, "");
         this.$store.commit('getApi')

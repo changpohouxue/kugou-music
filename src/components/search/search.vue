@@ -51,6 +51,8 @@
           })
         },
         searchGetUrl(e){
+            this.$store.state.searchFlag = true;
+        	this.$store.state.currentList = this.$store.state.searchList.info;	
             //歌曲信息
             this.$store.state.getMusic.hash = e.target.getAttribute('hash');
             this.$store.state.getMusic.name = e.target.innerHTML.replace(/(^\s*)|(\s*$)/g, "");

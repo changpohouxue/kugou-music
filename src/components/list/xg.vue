@@ -3,7 +3,7 @@
     <img src="./banner.jpg" alt="">
     <div class="kugou-xg-list">
       <ul>
-        <li class="kugou-xg-list-li" v-for="item in $store.state.xgList"  :hash = item.hash @click="getUrl">
+        <li v-for="item in $store.state.xgList"  :hash = item.hash @click="getUrl">
           {{item.name}}
         </li>
       </ul>
@@ -22,6 +22,8 @@
         },
         methods:{
           getUrl(e){
+            this.$store.state.searchFlag = false;
+        	this.$store.state.currentList = this.$store.state.xgList;
             //歌曲信息
             this.$store.state.getMusic.hash = e.target.getAttribute('hash');
             this.$store.state.getMusic.name = e.target.innerHTML.replace(/(^\s*)|(\s*$)/g, "");

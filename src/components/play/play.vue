@@ -26,18 +26,6 @@
     methods:{
  
       buffersEnd(){
-        if( document.getElementsByClassName('kugou-xg-list').length>0){
-        	this.$store.state.currentList = this.$store.state.xgList;
-        }else if(document.getElementsByClassName('rank-list').length>0){
-        	this.$store.state.currentList = this.$store.state.rankListCont;
-        }else if(document.getElementsByClassName('p-list').length>0){
-        	this.$store.state.currentList = this.$store.state.pListCont;
-        }else if(document.getElementsByClassName('kugou-child-search').length>0){
-        	this.$store.state.searchFlag = true;
-        	this.$store.state.currentList = this.$store.state.searchList.info;	
-        }else{
-        }
-
         this.$store.state.playStat.load = false;
         this.$store.state.playStat.seen = true;
         this.$store.state.music.state = true;
