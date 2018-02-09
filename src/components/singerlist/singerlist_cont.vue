@@ -38,7 +38,7 @@
     },
     mounted(){
       this.rankIdi = this.$route.params.id;
-      this.$http.get('/api/singer/list/'+this.rankIdi+'?page=2&json=true',{
+      this.$http.get('/api/singer/list/'+this.rankIdi+'?page=1&json=true',{
       }).then(function(response){
         var data = response.body;
         this.data = data;
