@@ -3,8 +3,8 @@
       <ul>
         <li v-for="item in $store.state.rankList">
           <router-link :to="item.url">
-              <img :src="item.img" class="rank-logo" alt="">
-              <span>{{item.name}}</span>
+              <img :src="item.imgurl" class="rank-logo" alt="">
+              <span>{{item.rankname}}</span>
               <img src="./arrow_icon.png" alt="" class="rank-next">
           </router-link>
         </li>
@@ -13,7 +13,23 @@
 </template>
 
 <script>
-
+export default{
+	mounted(){
+      this.$http.get('/api/rank/list&json=true',{
+      }).then(function(response){
+        var data = response.body;
+        this.data = data;
+        this.$store.state.rankList = [];
+        for (var index in data.rank.list){
+          var obj = {};
+          obj.rankname = data.rank.list[index].rankname;
+          obj.imgurl = data.rank.list[index].imgurl.replace('{size}',400);
+          obj.url = '/rank/'+ data.rank.list[index].rankid;
+          this.$store.state.rankList.push(obj);
+        }
+      });
+    }
+}
 </script>
 
 <style>

@@ -47,7 +47,7 @@
     mounted(){
       this.rankIdi = this.$route.params.id;
 
-      this.$http.get('/api/rank/info/?rankid='+this.rankIdi+'&page=3&json=true',{
+      this.$http.get('/api/rank/info/?rankid='+this.rankIdi+'&page=1&json=true',{
 
       }).then(function(response){
           var data = response.data;

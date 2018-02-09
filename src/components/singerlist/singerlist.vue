@@ -3,7 +3,7 @@
     <ul>
       <li v-for="item in $store.state.singerList">
         <router-link :to="item.url">
-          <span>{{item.name}}</span>
+          <span>{{item.classname}}</span>
           <img src="./arrow_icon.png" alt="" class="rank-next">
         </router-link>
       </li>
@@ -12,7 +12,27 @@
 </template>
 
 <script>
-
+export default{
+	mounted(){
+ 
+      this.$http.get('/api/singer/class&json=true',{
+      }).then(function(response){
+ 
+        var data = response.body;
+        
+        this.data = data;
+        this.$store.state.singerList = [];
+        
+        for (var index in data.list){
+          var obj = {};
+          
+          obj.classname = data.list[index].classname;
+          obj.url = '/singerlist/'+ data.list[index].classid;
+          this.$store.state.singerList.push(obj);
+        }
+      });
+    }
+}
 </script>
 
 <style>
