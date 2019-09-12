@@ -24,6 +24,7 @@
        }
      },
     methods:{
+ 
       buffersEnd(){
         this.$store.state.playStat.load = false;
         this.$store.state.playStat.seen = true;
@@ -96,16 +97,41 @@
         audio.pause();
       },
       next(){
-        var hash = this.$store.state.next.hash;
-        var name = this.$store.state.next.name;
+        var index;
+        for (index in this.$store.state.currentList){
+        	if (this.$store.state.currentList[index].hash == this.$store.state.getMusic.hash){
+          		break;
+       		}
+        }
+        
+        var currentIndex;
+        if(index==(this.$store.state.currentList.length-1)){
+        	currentIndex = 0;
+        }else{
+            currentIndex = parseInt(index)+1;
+        }
+        
+        
+        
+        var hash = this.$store.state.currentList[currentIndex].hash;
+        var name;
+        if(this.$store.state.searchFlag){
+            name = this.$store.state.currentList[currentIndex].filename;
+        }else{
+        	name = this.$store.state.currentList[currentIndex].name;
+        }
         this.$store.state.music.timeIndex.min = '00';
         this.$store.state.music.timeIndex.sin = '00';
         var lyrics = document.getElementsByClassName('kugou-play-lyrics-context-index')[0];
-        lyrics.style.top = 0;
+        if(lyrics){
+         lyrics.style.top = 0;
+        }
+       
         clearInterval(this.setInt);
         this.$http.get('/api/app/i/getSongInfo.php?cmd=playInfo&hash='+hash+'&from=mkugou',{
 
         }).then(function(response){
+ 
           var data = response.data;
           this.$store.state.music.url = data.url;
           this.$store.state.music.imgUrl = data.imgUrl.replace('{size}','200');
@@ -117,6 +143,8 @@
             s = '0' + s;
           }
           this.$store.state.music.timeLength =min +':' + s;
+          
+          this.$store.state.getMusic.hash = hash;
         });
         this.$http.get('/api/app/i/krc.php?cmd=100&keyword='+name+'&hash='+hash+'&timelength=329000&d=0.4067039370406582',{
 

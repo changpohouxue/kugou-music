@@ -1,10 +1,9 @@
 <template>
   <div class="rank">
     <ul>
-      <li v-for="item in $store.state.pList">
+      <li v-for="item in $store.state.singerList">
         <router-link :to="item.url">
-          <img :src="item.imgurl" class="rank-logo" alt="">
-          <span>{{item.specialname}}</span>
+          <span>{{item.classname}}</span>
           <img src="./arrow_icon.png" alt="" class="rank-next">
         </router-link>
       </li>
@@ -15,17 +14,21 @@
 <script>
 export default{
 	mounted(){
-      this.$http.get('/api/plist/index&json=true',{
+ 
+      this.$http.get('/api/singer/class&json=true',{
       }).then(function(response){
+ 
         var data = response.body;
+        
         this.data = data;
-        this.$store.state.pList = [];
-        for (var index in data.plist.list.info){
+        this.$store.state.singerList = [];
+        
+        for (var index in data.list){
           var obj = {};
-          obj.specialname = data.plist.list.info[index].specialname;
-          obj.imgurl = data.plist.list.info[index].imgurl.replace('{size}',400);
-          obj.url = '/plist/'+ data.plist.list.info[index].specialid;
-          this.$store.state.pList.push(obj);
+          
+          obj.classname = data.list[index].classname;
+          obj.url = '/singerlist/'+ data.list[index].classid;
+          this.$store.state.singerList.push(obj);
         }
       });
     }

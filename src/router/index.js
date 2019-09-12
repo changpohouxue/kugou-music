@@ -10,6 +10,11 @@ import rank from 'components/rank/rank'
 import rankList from 'components/rank/rank_list'
 import pList from 'components/plist/plist'
 import pListCont from 'components/plist/plist_cont'
+
+import singerList from 'components/singerlist/singerlist'
+import singerListCont from 'components/singerlist/singerlist_cont'
+import singerListDetailCont from 'components/singerlist/singerlist_detail'
+
 import playIndex from 'components/play_index/play_index'
 Vue.use(Router)
 
@@ -45,7 +50,7 @@ const router =  new Router({
               component:rank,
             },{
               path:'/gs',
-              component:gs
+              component:singerList
             },{
               path:'/xg',
               component:xinge
@@ -68,6 +73,14 @@ const router =  new Router({
           name:'歌词',
           path:'/playIndex',
           component:playIndex
+        },{
+          name:'歌手',
+          path:'/singerlist/:id',
+          component:singerListCont
+        },{
+          name:'歌手详情',
+          path:'/singerlistdetail/:id',
+          component:singerListDetailCont
         }
       ]
     }

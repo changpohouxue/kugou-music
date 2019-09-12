@@ -4,7 +4,7 @@
     <div class="kugou-xg-list">
       <ul>
         <li v-for="item in $store.state.xgList"  :hash = item.hash @click="getUrl">
-          {{item.name}}
+          {{item.filename}}
         </li>
       </ul>
     </div>
@@ -22,6 +22,8 @@
         },
         methods:{
           getUrl(e){
+            this.$store.state.searchFlag = false;
+        	this.$store.state.currentList = this.$store.state.xgList;
             //歌曲信息
             this.$store.state.getMusic.hash = e.target.getAttribute('hash');
             this.$store.state.getMusic.name = e.target.innerHTML.replace(/(^\s*)|(\s*$)/g, "");
@@ -29,7 +31,17 @@
             this.$store.state.next.hash = e.target.nextSibling.getAttribute('hash');
             this.$store.state.next.name = e.target.nextSibling.innerHTML;
           }
-        }
+        },
+        mounted(){
+     	 	this.$http.get('/api/?json=true',{
+      						}).then(function(response){
+        	var data = response.body;
+       		this.data = data;
+       		this.$store.state.xgList = data.data;
+        	 
+     		});
+    	}
+        
     }
 </script>
 

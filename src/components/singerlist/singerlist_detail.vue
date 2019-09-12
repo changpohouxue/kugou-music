@@ -5,13 +5,18 @@
       <span>{{rankTitle}}</span>
     </div>
     <div class="rank-banner">
-      <img :src="rankBanner" alt="">
+          <img :src="rankBanner" alt="">
     </div>
+ 
     <div class="rank-list-cont">
       <ul>
-        <li v-for="(item,index) in $store.state.pListCont" :hash="item.hash" @click="getUrl($event)">
-          {{item.filename}}
-        </li>
+         
+        <li v-for="(item,index) in $store.state.singerListDetailCont" :hash="item.hash" @click="getUrl($event)">
+              <span v-bind:class="[index == 0 ? 'one' : 'rank-index',index == 1 ? 'two' : '',index == 2 ? 'three' : '']" >{{ index+1}}</span>
+             {{item.filename}}
+            </li>
+         
+   
       </ul>
     </div>
   </div>
@@ -33,7 +38,7 @@
       },
       getUrl(e){
         this.$store.state.searchFlag = true;
-        this.$store.state.currentList = this.$store.state.pListCont;
+        this.$store.state.currentList = this.$store.state.singerListDetailCont;
         //歌曲信息
         this.$store.state.getMusic.hash = e.target.getAttribute('hash');
         this.$store.state.getMusic.name = e.target.innerHTML.replace(/(^\s*)|(\s*$)/g, "");
@@ -44,15 +49,13 @@
     },
     mounted(){
       this.rankIdi = this.$route.params.id;
-
-      this.$http.get('/api/plist/list/'+this.rankIdi+'?page=1&json=true',{
-
+      this.$http.get('/api/singer/info/'+this.rankIdi+'?page=2&json=true',{
       }).then(function(response){
         var data = response.body;
         this.data = data;
-        this.rankTitle = data.info.list.specialname;
-        this.rankBanner = data.info.list.imgurl.replace('{size}',400);
-        this.$store.state.pListCont = data.list.list.info;
+        this.rankTitle = data.info.singername;
+        this.rankBanner = data.info.imgurl.replace('{size}',400);
+        this.$store.state.singerListDetailCont = data.songs.list;
       });
 
     }

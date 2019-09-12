@@ -4,13 +4,17 @@
       <img src="./goback.png" alt="" @click="historyGo">
       <span>{{rankTitle}}</span>
     </div>
-    <div class="rank-banner">
-      <img :src="rankBanner" alt="">
-    </div>
+ 
     <div class="rank-list-cont">
       <ul>
-        <li v-for="(item,index) in $store.state.pListCont" :hash="item.hash" @click="getUrl($event)">
-          {{item.filename}}
+        <li v-for="(item,index) in $store.state.singerListCont">
+        
+         <router-link :to="item.url">
+          <img :src="item.imgurl" class="rank-logo" alt="">
+          <span>{{item.singername}}</span>
+          <img src="./arrow_icon.png" alt="" class="rank-next">
+        </router-link>
+         
         </li>
       </ul>
     </div>
@@ -30,29 +34,26 @@
     methods:{
       historyGo(){
         window.history.go(-1)
-      },
-      getUrl(e){
-        this.$store.state.searchFlag = true;
-        this.$store.state.currentList = this.$store.state.pListCont;
-        //歌曲信息
-        this.$store.state.getMusic.hash = e.target.getAttribute('hash');
-        this.$store.state.getMusic.name = e.target.innerHTML.replace(/(^\s*)|(\s*$)/g, "");
-        this.$store.commit('getApi')
-        this.$store.state.next.hash = e.target.nextSibling.getAttribute('hash');
-        this.$store.state.next.name = e.target.nextSibling.innerHTML;
       }
     },
     mounted(){
       this.rankIdi = this.$route.params.id;
-
-      this.$http.get('/api/plist/list/'+this.rankIdi+'?page=1&json=true',{
-
+      this.$http.get('/api/singer/list/'+this.rankIdi+'?page=1&json=true',{
       }).then(function(response){
         var data = response.body;
         this.data = data;
-        this.rankTitle = data.info.list.specialname;
-        this.rankBanner = data.info.list.imgurl.replace('{size}',400);
-        this.$store.state.pListCont = data.list.list.info;
+        this.rankTitle = data.classname;
+        
+       this.$store.state.singerListCont = [];
+        
+        for( var index in  data.singers.list.info){
+            var obj = {};
+            obj.url = '/singerlistdetail/'+ data.singers.list.info[index].singerid
+            obj.imgurl = data.singers.list.info[index].imgurl.replace('{size}',200);
+            obj.singername = data.singers.list.info[index].singername;
+            obj.singerid = data.singers.list.info[index].singerid;
+            this.$store.state.singerListCont.push(obj);
+        }
       });
 
     }
